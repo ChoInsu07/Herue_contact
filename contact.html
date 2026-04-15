@@ -627,7 +627,7 @@
                     <!-- 5. 프로젝트 내용 -->
                     <div class="input_wrap">
                         <p>5. 헤루랩이 프로젝트에 대해 알아야 할 내용에 대해 알려주세요.</p>
-                        <textarea v-model="project_info" placeholder="문의사항 및 프로젝트 내용을 입력해주세요."></textarea>
+                        <textarea v-model="project_info" name="project_requirement" placeholder="문의사항 및 프로젝트 내용을 입력해주세요."></textarea>
                     </div>
 
                     <!-- 6. 파일 첨부 -->
@@ -655,21 +655,21 @@
                             <div class="top">
                                 <div class="left">
                                     <span>회사/단체명 <em>(필수)</em></span>
-                                    <input type="text" placeholder="회사/단체명" v-model="company_name">
+                                    <input type="text" name="company_name" placeholder="회사/단체명" v-model="company_name">
                                 </div>
                                 <div class="right">
                                     <span>담당자명 <em>(필수)</em></span>
-                                    <input type="text" placeholder="담당자명" v-model="contact_person_name">
+                                    <input type="text" name="contact_person_name" placeholder="담당자명" v-model="contact_person_name">
                                 </div>
                             </div>
                             <div class="bottom">
                                 <div class="left">
                                     <span>연락처 <em>(필수)</em></span>
-                                    <input type="text" placeholder="연락처" maxlength="13" v-model="contact_number" @input="makeHypen">
+                                    <input type="text" name="contact_number" placeholder="연락처" maxlength="13" v-model="contact_number" @input="makeHypen">
                                 </div>
                                 <div class="right">
                                     <span>이메일 <em>(필수)</em></span>
-                                    <input type="email" placeholder="이메일" v-model="email">
+                                    <input type="email" name="email" placeholder="이메일" v-model="email">
                                 </div>
                             </div>
                         </div>
@@ -815,7 +815,13 @@
                     return this.budgetValue + '만';
                 }
             },
-            methods: {
+                methods: {
+                trackEvent(eventName, params = {}) {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', eventName, params);
+                    }
+                    console.log('GA4 Event:', eventName, params);
+                },
                 gtagEvent(eventName, eventParams) {
                     if (typeof gtag !== 'undefined') {
                         gtag('event', eventName, eventParams);
@@ -913,11 +919,18 @@
                         return;
                     }
 
-                    this.gtagEvent('submit_contact_form', {
+                    this.trackEvent('form_submit_click', {
                         project_type: this.project_type,
-                        detail_projects: this.detail_projects.join(', '),
-                        budget: this.estimated_budget,
-                        budget_value: this.budgetValue,
+                        detail_projects: this.detail_projects.filter(v => v).join(', '),
+                        budget: this.budgetValue,
+                        company: this.company_name
+                    });
+
+                    this.trackEvent('form_submit_success', {
+                        project_type: this.project_type,
+                        detail_projects: this.detail_projects.filter(v => v).join(', '),
+                        budget: this.budgetValue,
+                        budget_label: this.estimated_budget,
                         company: this.company_name,
                         discover_path: this.discover_path
                     });
@@ -933,30 +946,46 @@
                         } else {
                             this.detail_projects = [];
                         }
-                        this.gtagEvent('select_project_type', { project_type: val });
+                        this.trackEvent('project_type_select', { value: val });
                     },
                     detail_projects: {
                         handler(val) {
-                            this.gtagEvent('select_detail_project', { selected: val.filter(v => v).join(', ') });
+                            const filtered = val.filter(v => v);
+                            if (filtered.length > 0) {
+                                this.trackEvent('detail_project_select', { value: filtered.join(', ') });
+                            }
                         },
                         deep: true
                     },
                     discover_path(val) {
-                        this.gtagEvent('select_discover_path', { path: val });
+                        if (val) {
+                            this.trackEvent('discover_path_select', { value: val });
+                        }
+                    },
+                    privacy_policy_agreement(val) {
+                        if (val) {
+                            this.trackEvent('privacy_check');
+                        }
                     },
                     budgetValue(val) {
-                        this.gtagEvent('adjust_budget', { budget: val });
+                        if (val > 0) {
+                            this.trackEvent('budget_input_complete', { value: val });
+                        }
                     }
                 },
             mounted() {
-                this.gtagEvent('page_view', { page_title: 'Contact', page_location: window.location.href });
+                this.trackEvent('page_view', { page_title: 'Contact', page_location: window.location.href });
+                this.trackEvent('form_start');
 
                 const vm = this;
+
+                // 일정 datepicker
                 $('#projectStartDate').datepicker({
                     minDate: 0,
                     dateFormat: 'yy-mm-dd',
                     onSelect: function(dateText) {
                         vm.estimated_start_time = dateText;
+                        vm.trackEvent('schedule_input_complete', { field: 'start_date', value: dateText });
                     }
                 });
                 $('#projectEndDate').datepicker({
@@ -971,7 +1000,23 @@
                     dateFormat: 'yy-mm-dd',
                     onSelect: function(dateText) {
                         vm.available_date = dateText;
+                        vm.trackEvent('consulting_date_complete', { value: dateText });
                     }
+                });
+
+                // focus/blur 추적
+                const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
+                textInputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        const name = input.name || input.placeholder || input.id;
+                        vm.trackEvent('field_focus', { field: name });
+                    });
+                    input.addEventListener('blur', () => {
+                        if (input.value && input.value.length > 0) {
+                            const name = input.name || input.placeholder || input.id;
+                            vm.trackEvent('field_complete', { field: name, value: input.value.substring(0, 50) });
+                        }
+                    });
                 });
             }
         }).mount('#app');
