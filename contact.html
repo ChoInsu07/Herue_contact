@@ -367,6 +367,7 @@
                 },
                 startDrag(e) {
                     e.preventDefault();
+                    trackFieldFocus('budget');
                     this.isDragging = true;
                     this.drag(e);
                     document.addEventListener('mousemove', this.drag);
@@ -395,6 +396,9 @@
                     document.removeEventListener('mouseup', this.endDrag);
                     document.removeEventListener('touchmove', this.drag);
                     document.removeEventListener('touchend', this.endDrag);
+                    if (this.budgetValue > 0) {
+                        trackBudgetComplete(this.budgetValue);
+                    }
                 },
                 toggleFaq(index) {
                     if (this.openIndexes.includes(index)) {
@@ -478,11 +482,6 @@
                     privacy_policy_agreement(val) {
                         if (val) {
                             trackPrivacyCheck();
-                        }
-                    },
-                    budgetValue(val) {
-                        if (val > 0) {
-                            trackBudgetComplete(val);
                         }
                     }
                 },
