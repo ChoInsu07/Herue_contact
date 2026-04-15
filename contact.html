@@ -600,9 +600,9 @@
                     <div class="input_wrap">
                         <p>3. 프로젝트의 예상 일정을 알려주세요.</p>
                         <div class="date_picker">
-                            <input type="text" id="projectStartDate" placeholder="YYYY-MM-DD" v-model="estimated_start_time" readonly>
+                            <input type="text" ref="startDateInput" placeholder="시작일" v-model="estimated_start_time" readonly>
                             <span>~</span>
-                            <input type="text" id="projectEndDate" placeholder="YYYY-MM-DD" v-model="estimated_end_time" readonly>
+                            <input type="text" ref="endDateInput" placeholder="종료일" v-model="estimated_end_time" readonly>
                         </div>
                     </div>
 
@@ -681,7 +681,7 @@
                     <!-- 8. 컨설팅 -->
                     <div class="input_wrap select_wrap">
                         <p>8. 컨설팅이 가능한 일자를 알려주세요.</p>
-                        <input type="text" id="consultingDate" placeholder="YYYY-MM-DD" v-model="available_date" readonly>
+                        <input type="text" ref="consultingDateInput" placeholder="YYYY-MM-DD" v-model="available_date" readonly>
                         <select v-model="available_time">
                             <option value="" disabled>시간 선택</option>
                             <option value="10:00시">10:00시</option>
@@ -984,48 +984,62 @@
                     }
                 },
             mounted() {
-                initGA();
-                trackFormStart();
-
                 const vm = this;
 
-                // 일정 datepicker
-                $('#projectStartDate').datepicker({
-                    minDate: 0,
-                    dateFormat: 'yy-mm-dd',
-                    onSelect: function(dateText) {
-                        vm.estimated_start_time = dateText;
-                        trackFieldComplete('start_date', dateText);
-                    }
-                });
-                $('#projectEndDate').datepicker({
-                    minDate: 0,
-                    dateFormat: 'yy-mm-dd',
-                    onSelect: function(dateText) {
-                        vm.estimated_end_time = dateText;
-                        trackFieldComplete('end_date', dateText);
-                    }
-                });
-                $('#consultingDate').datepicker({
-                    minDate: 0,
-                    dateFormat: 'yy-mm-dd',
-                    onSelect: function(dateText) {
-                        vm.available_date = dateText;
-                        trackConsultingDate(dateText);
-                    }
-                });
+                // Vue가 마운트된 후 datepicker 초기화
+                this.$nextTick(() => {
+                    initGA();
+                    trackFormStart();
 
-                // focus/blur 추적
-                const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
-                textInputs.forEach(input => {
-                    input.addEventListener('focus', () => {
-                        const name = input.name || input.placeholder || input.id || 'unknown';
-                        trackFieldFocus(name);
+                    // 일정 datepicker - 시작일
+                    $(vm.$refs.startDateInput).datepicker({
+                        minDate: 0,
+                        dateFormat: 'yy-mm-dd',
+                        onClose: function() {
+                            if (vm.estimated_start_time) {
+                                trackFieldComplete('schedule_start', vm.estimated_start_time);
+                            }
+                        }
+                    }).on('focus', function() {
+                        trackFieldFocus('schedule_start');
                     });
-                    input.addEventListener('blur', () => {
-                        if (input.value && input.value.length > 0) {
-                            const name = input.name || input.placeholder || input.id || 'unknown';
-                            trackFieldComplete(name, input.value);
+
+                    // 일정 datepicker - 종료일
+                    $(vm.$refs.endDateInput).datepicker({
+                        minDate: 0,
+                        dateFormat: 'yy-mm-dd',
+                        onClose: function() {
+                            if (vm.estimated_end_time) {
+                                trackFieldComplete('schedule_end', vm.estimated_end_time);
+                            }
+                        }
+                    }).on('focus', function() {
+                        trackFieldFocus('schedule_end');
+                    });
+
+                    // 컨설팅 datepicker
+                    $(vm.$refs.consultingDateInput).datepicker({
+                        minDate: 0,
+                        dateFormat: 'yy-mm-dd',
+                        onClose: function() {
+                            if (vm.available_date) {
+                                trackConsultingDate(vm.available_date);
+                            }
+                        }
+                    }).on('focus', function() {
+                        trackFieldFocus('consulting_date');
+                    });
+
+                    // focus/blur 추적
+                    const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
+                    textInputs.forEach(input => {
+                        if (input.tagName === 'INPUT' && (input.type === 'text' || input.type === 'email')) {
+                            input.addEventListener('focus', () => {
+                                const name = input.name || input.placeholder || 'unknown';
+                                if (!name.includes('schedule') && !name.includes('consulting')) {
+                                    trackFieldFocus(name);
+                                }
+                            });
                         }
                     });
                 });
