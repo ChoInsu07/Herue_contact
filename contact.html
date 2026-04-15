@@ -600,9 +600,9 @@
                     <div class="input_wrap">
                         <p>3. 프로젝트의 예상 일정을 알려주세요.</p>
                         <div class="date_picker">
-                            <input type="text" ref="startDateInput" placeholder="시작일" v-model="estimated_start_time" readonly>
+                            <input type="text" id="startDate" class="date-input" placeholder="시작일" v-model="estimated_start_time" readonly>
                             <span>~</span>
-                            <input type="text" ref="endDateInput" placeholder="종료일" v-model="estimated_end_time" readonly>
+                            <input type="text" id="endDate" class="date-input" placeholder="종료일" v-model="estimated_end_time" readonly>
                         </div>
                     </div>
 
@@ -991,56 +991,52 @@
                     initGA();
                     trackFormStart();
 
-                    // 일정 datepicker - 시작일
-                    $(vm.$refs.startDateInput).datepicker({
+                    // 시작일 datepicker
+                    $('#startDate').datepicker({
                         minDate: 0,
                         dateFormat: 'yy-mm-dd',
-                        onClose: function() {
-                            if (vm.estimated_start_time) {
-                                trackFieldComplete('schedule_start', vm.estimated_start_time);
-                            }
+                        onSelect: function(dateText) {
+                            vm.estimated_start_time = dateText;
+                            trackFieldComplete('schedule_start', dateText);
                         }
                     }).on('focus', function() {
                         trackFieldFocus('schedule_start');
+                        $(this).datepicker('show');
                     });
 
-                    // 일정 datepicker - 종료일
-                    $(vm.$refs.endDateInput).datepicker({
+                    // 종료일 datepicker
+                    $('#endDate').datepicker({
                         minDate: 0,
                         dateFormat: 'yy-mm-dd',
-                        onClose: function() {
-                            if (vm.estimated_end_time) {
-                                trackFieldComplete('schedule_end', vm.estimated_end_time);
-                            }
+                        onSelect: function(dateText) {
+                            vm.estimated_end_time = dateText;
+                            trackFieldComplete('schedule_end', dateText);
                         }
                     }).on('focus', function() {
                         trackFieldFocus('schedule_end');
+                        $(this).datepicker('show');
                     });
 
                     // 컨설팅 datepicker
-                    $(vm.$refs.consultingDateInput).datepicker({
+                    $('#consultingDate').datepicker({
                         minDate: 0,
                         dateFormat: 'yy-mm-dd',
-                        onClose: function() {
-                            if (vm.available_date) {
-                                trackConsultingDate(vm.available_date);
-                            }
+                        onSelect: function(dateText) {
+                            vm.available_date = dateText;
+                            trackConsultingDate(dateText);
                         }
                     }).on('focus', function() {
                         trackFieldFocus('consulting_date');
+                        $(this).datepicker('show');
                     });
 
                     // focus/blur 추적
-                    const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
+                    const textInputs = document.querySelectorAll('input[type="text"]:not(.date-input), input[type="email"], textarea');
                     textInputs.forEach(input => {
-                        if (input.tagName === 'INPUT' && (input.type === 'text' || input.type === 'email')) {
-                            input.addEventListener('focus', () => {
-                                const name = input.name || input.placeholder || 'unknown';
-                                if (!name.includes('schedule') && !name.includes('consulting')) {
-                                    trackFieldFocus(name);
-                                }
-                            });
-                        }
+                        input.addEventListener('focus', () => {
+                            const name = input.name || input.placeholder || 'unknown';
+                            trackFieldFocus(name);
+                        });
                     });
                 });
             }
