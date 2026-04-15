@@ -1,0 +1,660 @@
+/* ============================================
+   HERUE LAB - Contact Page Styles
+   ============================================ */
+
+/* Font Classes */
+.font_bold { font-weight: 700; }
+.font_semibold { font-weight: 600; }
+.font_m { font-weight: 500; }
+.font_r { font-weight: 400; }
+.font_mon_bold { font-family: 'Monaco', 'SF Mono', monospace; font-weight: 700; }
+.font_mon_m { font-family: 'Monaco', 'SF Mono', monospace; font-weight: 500; }
+
+/* Layout */
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #de1334;
+}
+
+/* Section */
+.section01 {
+    padding-top: 120px;
+    padding-bottom: 60px;
+}
+
+.section01 h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.section01 p {
+    font-size: 18px;
+    color: #666;
+}
+
+.section02 {
+    padding-bottom: 100px;
+}
+
+/* Tab Container */
+.tab_container h3 {
+    font-size: 24px;
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+.tab_container h3 .svg {
+    color: #de1334;
+}
+
+/* Input Wrap */
+.input_wrap {
+    margin-bottom: 40px;
+}
+
+.input_wrap > p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.input_wrap em {
+    font-style: normal;
+    color: #de1334;
+}
+
+/* Button List */
+.button_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.button_list label {
+    cursor: pointer;
+}
+
+.button_list label input {
+    display: none;
+}
+
+.button_list label p span {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.button_list label:hover p span {
+    border-color: #333;
+}
+
+.button_list input:checked + p span {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+/* Project Description */
+.project_desc {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    display: none;
+}
+
+.project_desc.active {
+    display: block;
+}
+
+.project_desc p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #666;
+}
+
+.project_desc em {
+    font-style: normal;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Date Picker */
+.date_picker {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.date_picker input[type="date"] {
+    padding: 12px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 180px;
+    cursor: pointer;
+    background: #fff;
+    font-family: inherit;
+}
+
+.date_picker input[type="date"]:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.date_picker input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 4px;
+}
+
+.date_picker span {
+    font-weight: 600;
+    color: #999;
+}
+
+/* Budget Text */
+.budget_text {
+    font-size: 12px !important;
+    color: #999 !important;
+    font-weight: 400 !important;
+    margin-top: 8px !important;
+}
+
+/* Slider Container */
+.slider-container {
+    margin: 30px 0 20px;
+    padding: 0 10px;
+}
+
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.slider-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    min-width: 120px;
+    text-align: center;
+}
+
+.slider-value span {
+    font-size: 16px;
+    color: #666;
+}
+
+.slider-track {
+    position: relative;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.slider-fill {
+    position: absolute;
+    height: 100%;
+    background: #333;
+    border-radius: 4px;
+    left: 0;
+    transition: width 0.1s;
+}
+
+.slider-thumb {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background: #fff;
+    border: 3px solid #333;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.slider-thumb:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.slider-thumb:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Textarea */
+textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #333;
+}
+
+/* File Add */
+.file_add_box {
+    padding: 24px;
+    background: #f8f8f8;
+    border-radius: 12px;
+}
+
+.file_add_box span {
+    display: block;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.filebox label {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #333;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filebox label:hover {
+    background: #000;
+}
+
+.filebox input[type="file"] {
+    display: none;
+}
+
+.file_wrap {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.filename {
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.remove-file-btn {
+    width: 24px;
+    height: 24px;
+    background: #de1334;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Info Wrap */
+.info_wrap > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.info_wrap span {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.info_wrap span em {
+    color: #de1334;
+}
+
+.info_wrap input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.info_wrap input:focus {
+    outline: none;
+    border-color: #333;
+}
+
+/* Select Wrap */
+.select_wrap {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.select_wrap input[type="date"] {
+    padding: 12px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 200px;
+    cursor: pointer;
+    background: #fff;
+    font-family: inherit;
+}
+
+.select_wrap input[type="date"]:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.select_wrap select {
+    padding: 12px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    min-width: 150px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.select_wrap input:focus,
+.select_wrap select:focus {
+    outline: none;
+    border-color: #333;
+}
+
+/* Checkbox Wrap */
+.checkbox_wrap {
+    margin-top: 24px;
+}
+
+.checkbox_wrap label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.checkbox_wrap input {
+    display: none;
+}
+
+.checkbox_wrap .checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+}
+
+.checkbox_wrap input:checked + div .checkbox {
+    background: #333;
+    border-color: #333;
+}
+
+.checkbox_wrap input:checked + div .checkbox::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 14px;
+}
+
+.checkbox_wrap p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.checkbox_wrap a {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* Submit Wrap */
+.submit_wrap {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.submit_btn {
+    padding: 20px 60px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.submit_btn:hover {
+    background: #000;
+    transform: scale(1.02);
+}
+
+/* FAQ Section */
+.faq-section {
+    margin-top: 100px;
+    border-top: 1px solid #eee;
+    padding-top: 60px;
+}
+
+.faq-section .title-wrap {
+    margin-bottom: 30px;
+}
+
+.faq-section .title-wrap span {
+    font-size: 20px;
+}
+
+.faq-list .faq-item {
+    border-bottom: 1px solid #eee;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+.faq-question .q-text {
+    display: flex;
+    gap: 12px;
+}
+
+.faq-question .q-text span {
+    color: #de1334;
+}
+
+.faq-question .q-text p {
+    font-size: 15px;
+}
+
+.faq-question .icon img {
+    width: 20px;
+    transition: transform 0.3s;
+}
+
+.faq-item.open .faq-question .icon img {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding-bottom: 20px;
+}
+
+.faq-answer .a-text {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+    padding-left: 30px;
+}
+
+.faq-answer .a-text span {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Footer */
+.footer {
+    padding: 60px 40px;
+    background: #1a1a1a;
+    color: #fff;
+    margin-top: 100px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+}
+
+.footer h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.footer p,
+.footer a {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    text-decoration: none;
+    line-height: 2;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    font-family: 'Monaco', 'SF Mono', monospace;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+
+    .nav {
+        gap: 20px;
+    }
+
+    .section01 {
+        padding-top: 100px;
+    }
+
+    .section01 h2 {
+        font-size: 36px;
+    }
+
+    .info_wrap > div {
+        grid-template-columns: 1fr;
+    }
+
+    .select_wrap {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .select_wrap input[type="date"],
+    .select_wrap select {
+        width: 100%;
+    }
+
+    .date_picker {
+        flex-wrap: wrap;
+    }
+
+    .date_picker input[type="date"] {
+        width: 100%;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
