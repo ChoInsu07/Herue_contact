@@ -28,8 +28,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker.min.css">
     
     <!-- GA4 이벤트 추적 -->
     <script src="js/ga4-events.js"></script>
@@ -600,9 +598,9 @@
                     <div class="input_wrap">
                         <p>3. 프로젝트의 예상 일정을 알려주세요.</p>
                         <div class="date_picker">
-                            <input type="text" id="startDate" class="date-input" placeholder="시작일" v-model="estimated_start_time" readonly>
+                            <input type="date" id="startDate" class="date-input" v-model="estimated_start_time" @focus="trackFieldFocus('schedule_start')" @change="trackFieldComplete('schedule_start', estimated_start_time)">
                             <span>~</span>
-                            <input type="text" id="endDate" class="date-input" placeholder="종료일" v-model="estimated_end_time" readonly>
+                            <input type="date" id="endDate" class="date-input" v-model="estimated_end_time" @focus="trackFieldFocus('schedule_end')" @change="trackFieldComplete('schedule_end', estimated_end_time)">
                         </div>
                     </div>
 
@@ -681,7 +679,7 @@
                     <!-- 8. 컨설팅 -->
                     <div class="input_wrap select_wrap">
                         <p>8. 컨설팅이 가능한 일자를 알려주세요.</p>
-                        <input type="text" ref="consultingDateInput" placeholder="YYYY-MM-DD" v-model="available_date" readonly>
+                        <input type="date" id="consultingDate" v-model="available_date" @focus="trackFieldFocus('consulting_date')" @change="trackConsultingDate(available_date)">
                         <select v-model="available_time">
                             <option value="" disabled>시간 선택</option>
                             <option value="10:00시">10:00시</option>
@@ -984,59 +982,21 @@
                     }
                 },
             mounted() {
-                const vm = this;
+                initGA();
+                trackFormStart();
 
-                // Vue가 마운트된 후 datepicker 초기화
-                this.$nextTick(() => {
-                    initGA();
-                    trackFormStart();
-
-                    // 시작일 datepicker
-                    $('#startDate').datepicker({
-                        minDate: 0,
-                        dateFormat: 'yy-mm-dd',
-                        onSelect: function(dateText) {
-                            vm.estimated_start_time = dateText;
-                            trackFieldComplete('schedule_start', dateText);
-                        }
-                    }).on('focus', function() {
-                        trackFieldFocus('schedule_start');
-                        $(this).datepicker('show');
+                // focus/blur 추적 (date input 제외)
+                const textInputs = document.querySelectorAll('input[type="text"]:not(.date-input), input[type="email"], textarea');
+                textInputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        const name = input.name || input.placeholder || 'unknown';
+                        trackFieldFocus(name);
                     });
-
-                    // 종료일 datepicker
-                    $('#endDate').datepicker({
-                        minDate: 0,
-                        dateFormat: 'yy-mm-dd',
-                        onSelect: function(dateText) {
-                            vm.estimated_end_time = dateText;
-                            trackFieldComplete('schedule_end', dateText);
-                        }
-                    }).on('focus', function() {
-                        trackFieldFocus('schedule_end');
-                        $(this).datepicker('show');
-                    });
-
-                    // 컨설팅 datepicker
-                    $('#consultingDate').datepicker({
-                        minDate: 0,
-                        dateFormat: 'yy-mm-dd',
-                        onSelect: function(dateText) {
-                            vm.available_date = dateText;
-                            trackConsultingDate(dateText);
-                        }
-                    }).on('focus', function() {
-                        trackFieldFocus('consulting_date');
-                        $(this).datepicker('show');
-                    });
-
-                    // focus/blur 추적
-                    const textInputs = document.querySelectorAll('input[type="text"]:not(.date-input), input[type="email"], textarea');
-                    textInputs.forEach(input => {
-                        input.addEventListener('focus', () => {
+                    input.addEventListener('blur', () => {
+                        if (input.value && input.value.length > 0) {
                             const name = input.name || input.placeholder || 'unknown';
-                            trackFieldFocus(name);
-                        });
+                            trackFieldComplete(name, input.value);
+                        }
                     });
                 });
             }
