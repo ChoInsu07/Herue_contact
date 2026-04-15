@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-98FENE8HRE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-98FENE8HRE');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헤루 | CONTACT</title>
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        @font-face {
+            font-family: 'Mon';
+            src: local('SF Mono'), local('Monaco'), local('monospace');
+        }
+
+        .font_bold { font-weight: 700; }
+        .font_semibold { font-weight: 600; }
+        .font_m { font-weight: 500; }
+        .font_r { font-weight: 400; }
+        .font_mon_bold { font-family: 'Monaco', 'SF Mono', monospace; font-weight: 700; }
+        .font_mon_m { font-family: 'Monaco', 'SF Mono', monospace; font-weight: 500; }
+
+        .wrapper { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        .header {
+            padding: 20px 40px;
+            border-bottom: 1px solid #eee;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+        }
+        .nav {
+            display: flex;
+            gap: 40px;
+        }
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-link:hover { color: #de1334; }
+        .nav-link.active { color: #de1334; }
+
+        .section01 {
+            padding-top: 120px;
+            padding-bottom: 60px;
+        }
+        .section01 h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .section01 p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .section02 {
+            padding-bottom: 100px;
+        }
+
+        .tab_container h3 {
+            font-size: 24px;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+        .tab_container h3 .svg {
+            color: #de1334;
+        }
+
+        .input_wrap {
+            margin-bottom: 40px;
+        }
+        .input_wrap > p {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .input_wrap em {
+            font-style: normal;
+            color: #de1334;
+        }
+
+        .button_list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .button_list label {
+            cursor: pointer;
+        }
+        .button_list label input {
+            display: none;
+        }
+        .button_list label p span {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .button_list label:hover p span {
+            border-color: #333;
+        }
+        .button_list input:checked + p span {
+            background: #333;
+            color: #fff;
+            border-color: #333;
+        }
+
+        .project_desc {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 12px;
+            display: none;
+        }
+        .project_desc.active { display: block; }
+        .project_desc p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #666;
+        }
+        .project_desc em {
+            font-style: normal;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .date_picker {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .date_picker input {
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 200px;
+            cursor: pointer;
+        }
+        .date_picker input:focus {
+            outline: none;
+            border-color: #333;
+        }
+        .date_picker span {
+            font-weight: 600;
+            color: #999;
+        }
+
+        .budget_text {
+            font-size: 12px !important;
+            color: #999 !important;
+            font-weight: 400 !important;
+            margin-top: 8px !important;
+        }
+        .slider-container {
+            margin: 30px 0 20px;
+            padding: 0 10px;
+        }
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .slider-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            min-width: 120px;
+            text-align: center;
+        }
+        .slider-value span {
+            font-size: 16px;
+            color: #666;
+        }
+        .slider-track {
+            position: relative;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        .slider-fill {
+            position: absolute;
+            height: 100%;
+            background: #333;
+            border-radius: 4px;
+            left: 0;
+            transition: width 0.1s;
+        }
+        .slider-thumb {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background: #fff;
+            border: 3px solid #333;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            cursor: grab;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .slider-thumb:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .slider-thumb:active {
+            cursor: grabbing;
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #333;
+        }
+
+        .file_add_box {
+            padding: 24px;
+            background: #f8f8f8;
+            border-radius: 12px;
+        }
+        .file_add_box span {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .filebox label {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .filebox label:hover {
+            background: #000;
+        }
+        .filebox input[type="file"] {
+            display: none;
+        }
+        .file_wrap {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .file_wrap .filename {
+            padding: 8px 16px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .file_wrap .remove-file-btn {
+            width: 24px;
+            height: 24px;
+            background: #de1334;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .info_wrap > div {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .info_wrap span {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .info_wrap span em {
+            color: #de1334;
+        }
+        .info_wrap input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .info_wrap input:focus {
+            outline: none;
+            border-color: #333;
+        }
+
+        .select_wrap {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .select_wrap > input {
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 200px;
+        }
+        .select_wrap select {
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 150px;
+            cursor: pointer;
+        }
+        .select_wrap input:focus,
+        .select_wrap select:focus {
+            outline: none;
+            border-color: #333;
+        }
+
+        .checkbox_wrap {
+            margin-top: 24px;
+        }
+        .checkbox_wrap label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+        }
+        .checkbox_wrap input {
+            display: none;
+        }
+        .checkbox_wrap .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .checkbox_wrap input:checked + div .checkbox {
+            background: #333;
+            border-color: #333;
+            position: relative;
+        }
+        .checkbox_wrap input:checked + div .checkbox::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 14px;
+        }
+        .checkbox_wrap p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .checkbox_wrap a {
+            color: #333;
+            text-decoration: underline;
+        }
+
+        .submit_wrap {
+            margin-top: 60px;
+            text-align: center;
+        }
+        .submit_btn {
+            padding: 20px 60px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .submit_btn:hover {
+            background: #000;
+            transform: scale(1.02);
+        }
+
+        .faq-section {
+            margin-top: 100px;
+            border-top: 1px solid #eee;
+            padding-top: 60px;
+        }
+        .faq-section .title-wrap {
+            margin-bottom: 30px;
+        }
+        .faq-section .title-wrap span {
+            font-size: 20px;
+        }
+        .faq-list .faq-item {
+            border-bottom: 1px solid #eee;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            cursor: pointer;
+        }
+        .faq-question .q-text {
+            display: flex;
+            gap: 12px;
+        }
+        .faq-question .q-text span {
+            color: #de1334;
+        }
+        .faq-question .q-text p {
+            font-size: 15px;
+        }
+        .faq-question .icon img {
+            width: 20px;
+            transition: transform 0.3s;
+        }
+        .faq-item.open .faq-question .icon img {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding-bottom: 20px;
+        }
+        .faq-answer .a-text {
+            display: flex;
+            gap: 12px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            padding-left: 30px;
+        }
+        .faq-answer .a-text span {
+            color: #333;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .info_wrap > div {
+                grid-template-columns: 1fr;
+            }
+            .section01 h2 {
+                font-size: 36px;
+            }
+            .select_wrap {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .select_wrap > input,
+            .select_wrap select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo-text">HERUE LAB</a>
+        <nav class="nav">
+            <a href="about.html" class="nav-link">ABOUT.</a>
+            <a href="project.html" class="nav-link">PROJECT.</a>
+            <a href="contact.html" class="nav-link active">CONTACT.</a>
+        </nav>
+    </header>
+
+    <section class="section01">
+        <div class="wrapper">
+            <h2 class="font_mon_bold">CONTACT.</h2>
+            <p class="font_bold">
+                브랜드를 '운영'하는 파트너.<br>
+                <span>헤루랩입니다.</span>
+            </p>
+        </div>
+    </section>
+
+    <section class="section02">
+        <div id="app">
+            <div class="wrapper">
+                <div class="tab_container only-one">
+                    <h3 class="font_bold">우리가 함께 운영할<br><span class="svg">프로젝트</span>에 대해 알려주세요.</h3>
+
+                    <!-- 1. 프로젝트 유형 -->
+                    <div class="input_wrap list_wrap">
+                        <p>1. 필요한 프로젝트 유형을 선택해 주세요.</p>
+                        <div class="button_list">
+                            <label>
+                                <input type="radio" v-model="project_type" value="subscription">
+                                <p><span>연간 (구독형)</span></p>
+                            </label>
+                            <label>
+                                <input type="radio" v-model="project_type" value="single">
+                                <p><span>단기 (단건형)</span></p>
+                            </label>
+                        </div>
+                        <div class="project_desc" :class="{ active: project_type === 'subscription' }">
+                            <p class="font_m">
+                                <em>연간 (구독형) 프로젝트</em>는 디자인팀을 따로 두기 어려운 기업을 위한 <em>프로젝트</em> 입니다.<br>
+                                연간 단위로 운영되며 한 팀처럼 지속적으로 관리해 드립니다.
+                            </p>
+                        </div>
+                        <div class="project_desc" :class="{ active: project_type === 'single' }">
+                            <p class="font_m">
+                                <em>단기 (단건형) 프로젝트</em>는 하나의 목표에 집중하는 기업을 위한 <em>프로젝트</em>입니다.<br>
+                                로고 제작, 패키지 개발, 웹사이트 구축 등 명확한 결과물을 제공해 드립니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 2. 세부 프로젝트 -->
+                    <div class="input_wrap list_wrap">
+                        <p>2. 세부 프로젝트를 선택해 주세요. <span v-if="project_type === 'single'">(중복선택 가능)</span></p>
+                        <div class="button_list">
+                            <label v-for="item in project_type === 'subscription' ? subscription_projects : single_projects" :key="item.value">
+                                <input v-if="project_type === 'subscription'" type="radio" name="detail" :value="item.value" v-model="detail_projects[0]">
+                                <input v-else type="checkbox" :value="item.value" v-model="detail_projects" @change="updateLastSelected(item.value)">
+                                <p><span>{{ item.name }}</span></p>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 3. 일정 -->
+                    <div class="input_wrap">
+                        <p>3. 프로젝트의 예상 일정을 알려주세요.</p>
+                        <div class="date_picker">
+                            <input type="text" id="projectStartDate" placeholder="YYYY-MM-DD" v-model="estimated_start_time" readonly>
+                            <span>~</span>
+                            <input type="text" id="projectEndDate" placeholder="YYYY-MM-DD" v-model="estimated_end_time" readonly>
+                        </div>
+                    </div>
+
+                    <!-- 4. 예산 -->
+                    <div class="input_wrap">
+                        <p>4. 프로젝트의 대략적인 월 예산을 알려주세요.<em> (필수)</em></p>
+                        <p class="budget_text">만원 단위 (월)</p>
+                        <div class="slider-container" ref="sliderContainer">
+                            <div class="slider-header">
+                                <div class="slider-value">
+                                    <span ref="budgetDisplay">{{ budgetValue }}</span><span>만원</span>
+                                </div>
+                            </div>
+                            <div class="slider-track" ref="sliderTrack" @mousedown="startDrag" @touchstart="startDrag">
+                                <div class="slider-fill" :style="{ width: budgetPercent + '%' }"></div>
+                                <div class="slider-thumb" :style="{ left: budgetPercent + '%' }"></div>
+                            </div>
+                            <div class="slider-labels">
+                                <span>0</span>
+                                <span>500만원+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. 프로젝트 내용 -->
+                    <div class="input_wrap">
+                        <p>5. 헤루랩이 프로젝트에 대해 알아야 할 내용에 대해 알려주세요.</p>
+                        <textarea v-model="project_info" placeholder="문의사항 및 프로젝트 내용을 입력해주세요."></textarea>
+                    </div>
+
+                    <!-- 6. 파일 첨부 -->
+                    <div class="input_wrap file_add">
+                        <p>6. 기획안, 회사 소개서 등 참고할 자료를 첨부해 주세요.</p>
+                        <div class="file_add_box">
+                            <span>파일은 1개당, 20MB까지 첨부 가능합니다.<br>용량이 큰 경우, order@heruelab.com으로 보내주세요.<br>업로드 가능한 파일 확장자 : PDF, PPT, PPTX, DOC, DOCX, HWP, HWPX, KEY, PNG, JPEG, JPG, ZIP</span>
+                            <div class="filebox">
+                                <label>
+                                    파일 선택
+                                    <input type="file" accept=".pdf,.ppt,.pptx,.doc,.docx,.hwp,.hwpx,.key,.png,.jpeg,.jpg,.zip" ref="file_input" multiple @change="loadfiles">
+                                </label>
+                                <div class="file_wrap" v-for="(item, index) in file" :key="index">
+                                    <span class="filename">{{ item.name }}</span>
+                                    <button type="button" class="remove-file-btn" @click="deleteFile(index)">×</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. 의뢰인 정보 -->
+                    <div class="input_wrap">
+                        <p>7. 의뢰인의 정보에 대해 알려주세요.</p>
+                        <div class="info_wrap">
+                            <div class="top">
+                                <div class="left">
+                                    <span>회사/단체명 <em>(필수)</em></span>
+                                    <input type="text" placeholder="회사/단체명" v-model="company_name">
+                                </div>
+                                <div class="right">
+                                    <span>담당자명 <em>(필수)</em></span>
+                                    <input type="text" placeholder="담당자명" v-model="contact_person_name">
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                <div class="left">
+                                    <span>연락처 <em>(필수)</em></span>
+                                    <input type="text" placeholder="연락처" maxlength="13" v-model="contact_number" @input="makeHypen">
+                                </div>
+                                <div class="right">
+                                    <span>이메일 <em>(필수)</em></span>
+                                    <input type="email" placeholder="이메일" v-model="email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. 컨설팅 -->
+                    <div class="input_wrap select_wrap">
+                        <p>8. 컨설팅이 가능한 일자를 알려주세요.</p>
+                        <input type="text" id="consultingDate" placeholder="YYYY-MM-DD" v-model="available_date" readonly>
+                        <select v-model="available_time">
+                            <option value="" disabled>시간 선택</option>
+                            <option value="10:00시">10:00시</option>
+                            <option value="11:00시">11:00시</option>
+                            <option value="12:00시">12:00시</option>
+                            <option value="13:00시">13:00시</option>
+                            <option value="14:00시">14:00시</option>
+                            <option value="15:00시">15:00시</option>
+                            <option value="16:00시">16:00시</option>
+                            <option value="17:00시">17:00시</option>
+                        </select>
+                        <select v-model="meeting_type">
+                            <option value="" disabled>미팅 방식</option>
+                            <option value="화상미팅">화상미팅</option>
+                            <option value="헤루방문">헤루방문</option>
+                        </select>
+                    </div>
+
+                    <!-- 9. 경로 -->
+                    <div class="input_wrap list_wrap path">
+                        <p>9. 헤루랩을 알게되신 경로에 대해 알려주세요.</p>
+                        <div class="button_list">
+                            <label><input type="radio" v-model="discover_path" value="naver"><p><span>네이버 검색</span></p></label>
+                            <label><input type="radio" v-model="discover_path" value="google"><p><span>구글 검색</span></p></label>
+                            <label><input type="radio" v-model="discover_path" value="instagram"><p><span>인스타그램</span></p></label>
+                            <label><input type="radio" v-model="discover_path" value="youtube"><p><span>유튜브</span></p></label>
+                            <label><input type="radio" v-model="discover_path" value="customer"><p><span>기존 고객 추천</span></p></label>
+                            <label><input type="radio" v-model="discover_path" value="referral"><p><span>지인 소개</span></p></label>
+                            <label><input type="radio" v-model="discover_path" value="ads"><p><span>광고 (검색/배너)</span></p></label>
+                        </div>
+                        <div class="checkbox_wrap font_black">
+                            <label>
+                                <input type="checkbox" v-model="privacy_policy_agreement">
+                                <div>
+                                    <div class="checkbox"></div>
+                                    <p><a href="/person.html" target="_blank">개인정보처리방침</a>에 동의합니다. <em>&nbsp;(필수)</em></p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 제출 -->
+                    <div class="submit_wrap">
+                        <button type="button" class="submit_btn" @click="submit">프로젝트<br>문의하기</button>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <div class="title-wrap"><span class="font_semibold">자주 묻는 질문</span></div>
+                        <div class="faq-list">
+                            <div class="faq-item" v-for="(item, index) in faqList" :key="index" :class="{ open: openIndexes.includes(index) }">
+                                <div class="faq-question" @click="toggleFaq(index)">
+                                    <div class="q-text">
+                                        <span>Q{{ index + 1 }}.</span>
+                                        <p>{{ item.q }}</p>
+                                    </div>
+                                    <div class="icon"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDlMMi41IDE1LjVMMTggMTUuNWwxNSA1LjVMMTAgMTEuNUw1IDE1LjVsMTMtMTB6Ii8+Cjwvc3ZnPg==" alt=""></div>
+                                </div>
+                                <div v-if="openIndexes.includes(index)" class="faq-answer">
+                                    <div class="a-text">
+                                        <span>A{{ index + 1 }}.</span>
+                                        <p v-html="item.a"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    project_type: 'subscription',
+                    detail_projects: [],
+                    last_selected_project: '',
+                    subscription_projects: [
+                        { value: 'total', name: '브랜드 디자인 토탈 운영' },
+                        { value: 'edu', name: '교육 브랜드 디자인 운영' },
+                        { value: 'sns', name: 'SNS 콘텐츠 디자인 운영' },
+                        { value: 'amazon', name: '아마존 커머스 디자인 운영' }
+                    ],
+                    single_projects: [
+                        { value: 'bxbi', name: 'BX/BI' },
+                        { value: 'package', name: '패키지 디자인' },
+                        { value: 'marketing', name: '마케팅 디자인' },
+                        { value: 'web', name: '홈페이지 제작' },
+                        { value: 'space', name: '공간 브랜딩' },
+                        { value: 'video', name: '영상' },
+                        { value: 'ip', name: 'IP 캐릭터 개발' }
+                    ],
+                    estimated_start_time: '',
+                    estimated_end_time: '',
+                    budgetValue: 0,
+                    budgetMax: 5000,
+                    project_info: '',
+                    file: [],
+                    company_name: '',
+                    contact_person_name: '',
+                    contact_number: '',
+                    email: '',
+                    available_date: '',
+                    available_time: '',
+                    meeting_type: '',
+                    discover_path: '',
+                    privacy_policy_agreement: false,
+                    openIndexes: [],
+                    isDragging: false,
+                    faqList: [
+                        { q: '프로젝트는 보통 얼마나 걸리나요?', a: '브랜드 범위에 따라 다르지만 단건 기준으로 평균 4–8주 정도 소요됩니다.<br>초기 상담 후 프로젝트 단계별로 미팅을 진행한 후 정확한 일정표를 공유드립니다.' },
+                        { q: '예산은 어느 정도로 생각하면 될까요?', a: '프로젝트 범위와 요구 사항에 따라 금액은 달라질 수 있습니다.<br>브랜드 전략과 로고 디자인을 포함한 브랜드 구축은 1,500만 원부터 시작하며<br>상담을 통해 필요한 범위를 정의한 후 맞춤 견적을 안내드립니다.' },
+                        { q: '프로젝트에는 몇 명이 투입되나요?', a: '디자인 팀장과 전담 PM을 중심으로, 프로젝트 성격에 맞는 2–4인의 전담 팀이 구성되어 진행됩니다.' },
+                        { q: '소규모 프로젝트도 의뢰 가능한가요?', a: '가능합니다. 다만 브랜드의 일관성과 완성도를 위해 필요한 최소 범위를 함께 제안드릴 수 있습니다.' },
+                        { q: '어디까지 작업해 주시고, 수정은 몇 번까지 가능한가요?', a: '로고, BI, 패키지, 콘텐츠, 웹 비주얼까지 브랜드의 기준과 얼굴이 되는 전반적인 디자인을 통합적으로 진행합니다.<br>수정은 단계별 합리적인 라운드를 포함하며, 방향성이 확정된 이후에는 완성도를 빠르게 끌어올리는 방식으로 운영됩니다.' },
+                        { q: '단순 디자인 외에 브랜드 전략도 같이 하나요?', a: '네, 디자인에 앞서 브랜드의 방향성과 구조를 먼저 함께 설계합니다.<br>기초가 명확해야 이후의 디자인과 마케팅이 일관되게 이어질 수 있기 때문입니다.' },
+                        { q: '계약 후 바로 시작할 수 있나요?', a: '일정에 따라 착수 가능 시점을 안내드리며 계약 완료 후 보통 1주 이내에 킥오프 미팅을 진행합니다.' },
+                        { q: '헤루는 어떤 회사라고 보면 되나요?', a: '헤루는 브랜드의 장기적인 성장을 함께 설계하는 운영 파트너입니다.<br>전략과 실행을 분리하지 않고 통합적으로 운영합니다.' }
+                    ]
+                };
+            },
+            computed: {
+                budgetPercent() {
+                    return (this.budgetValue / this.budgetMax) * 100;
+                },
+                estimated_budget() {
+                    if (this.budgetValue >= this.budgetMax) {
+                        return this.budgetMax + '만+';
+                    }
+                    return this.budgetValue + '만';
+                }
+            },
+            methods: {
+                gtagEvent(eventName, eventParams) {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', eventName, eventParams);
+                        console.log('GA4 Event:', eventName, eventParams);
+                    }
+                },
+                makeHypen() {
+                    let str = this.contact_number.replace(/[^0-9]/g, '');
+                    if (str.length < 4) return str;
+                    else if (str.length < 7) {
+                        return str.substr(0, 3) + '-' + str.substr(3);
+                    } else if (str.length < 11) {
+                        return str.substr(0, 3) + '-' + str.substr(3, 3) + '-' + str.substr(6);
+                    } else {
+                        return str.substr(0, 3) + '-' + str.substr(3, 4) + '-' + str.substr(7);
+                    }
+                },
+                loadfiles(event) {
+                    for (let i = 0; i < event.target.files.length; i++) {
+                        this.file.push(event.target.files[i]);
+                    }
+                    this.gtagEvent('upload_file', { file_count: this.file.length });
+                },
+                deleteFile(index) {
+                    this.file.splice(index, 1);
+                },
+                startDrag(e) {
+                    e.preventDefault();
+                    this.isDragging = true;
+                    this.drag(e);
+                    document.addEventListener('mousemove', this.drag);
+                    document.addEventListener('mouseup', this.endDrag);
+                    document.addEventListener('touchmove', this.drag);
+                    document.addEventListener('touchend', this.endDrag);
+                },
+                drag(e) {
+                    if (!this.isDragging) return;
+                    const track = this.$refs.sliderTrack;
+                    if (!track) return;
+                    
+                    const rect = track.getBoundingClientRect();
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    let percent = (clientX - rect.left) / rect.width;
+                    percent = Math.max(0, Math.min(1, percent));
+                    
+                    let value = Math.round(percent * this.budgetMax / 100) * 100;
+                    if (value > this.budgetMax) value = this.budgetMax;
+                    
+                    this.budgetValue = value;
+                },
+                endDrag() {
+                    this.isDragging = false;
+                    document.removeEventListener('mousemove', this.drag);
+                    document.removeEventListener('mouseup', this.endDrag);
+                    document.removeEventListener('touchmove', this.drag);
+                    document.removeEventListener('touchend', this.endDrag);
+                },
+                toggleFaq(index) {
+                    if (this.openIndexes.includes(index)) {
+                        this.openIndexes = this.openIndexes.filter(i => i !== index);
+                    } else {
+                        this.openIndexes.push(index);
+                    }
+                },
+                updateLastSelected(value) {
+                    if (this.detail_projects.includes(value)) {
+                        this.last_selected_project = value;
+                    } else {
+                        this.last_selected_project = '';
+                    }
+                },
+                submit() {
+                    if (this.budgetValue === 0) {
+                        alert('예산을 입력해주세요.');
+                        return;
+                    }
+                    if (!this.company_name) {
+                        alert('회사명을 입력해주세요.');
+                        return;
+                    }
+                    if (!this.contact_person_name) {
+                        alert('담당자를 입력해주세요.');
+                        return;
+                    }
+                    if (!this.contact_number || this.contact_number.length < 13) {
+                        alert('올바른 연락처를 입력해주세요.');
+                        return;
+                    }
+                    if (!this.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
+                        alert('올바른 이메일 형식을 입력해주세요.');
+                        return;
+                    }
+                    if (!this.privacy_policy_agreement) {
+                        alert('개인정보처리방침에 동의해주세요.');
+                        return;
+                    }
+
+                    this.gtagEvent('submit_contact_form', {
+                        project_type: this.project_type,
+                        detail_projects: this.detail_projects.join(', '),
+                        budget: this.estimated_budget,
+                        budget_value: this.budgetValue,
+                        company: this.company_name,
+                        discover_path: this.discover_path
+                    });
+
+                    alert('문의가 완료되었습니다.');
+                    window.location.reload();
+                }
+                },
+                watch: {
+                    project_type(val) {
+                        if (val === 'subscription') {
+                            this.detail_projects = [''];
+                        } else {
+                            this.detail_projects = [];
+                        }
+                        this.gtagEvent('select_project_type', { project_type: val });
+                    },
+                    detail_projects: {
+                        handler(val) {
+                            this.gtagEvent('select_detail_project', { selected: val.filter(v => v).join(', ') });
+                        },
+                        deep: true
+                    },
+                    discover_path(val) {
+                        this.gtagEvent('select_discover_path', { path: val });
+                    },
+                    budgetValue(val) {
+                        this.gtagEvent('adjust_budget', { budget: val });
+                    }
+                },
+            mounted() {
+                this.gtagEvent('page_view', { page_title: 'Contact', page_location: window.location.href });
+
+                const vm = this;
+                $('#projectStartDate').datepicker({
+                    minDate: 0,
+                    dateFormat: 'yy-mm-dd',
+                    onSelect: function(dateText) {
+                        vm.estimated_start_time = dateText;
+                    }
+                });
+                $('#projectEndDate').datepicker({
+                    minDate: 0,
+                    dateFormat: 'yy-mm-dd',
+                    onSelect: function(dateText) {
+                        vm.estimated_end_time = dateText;
+                    }
+                });
+                $('#consultingDate').datepicker({
+                    minDate: 0,
+                    dateFormat: 'yy-mm-dd',
+                    onSelect: function(dateText) {
+                        vm.available_date = dateText;
+                    }
+                });
+            }
+        }).mount('#app');
+    </script>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4>HERUE LAB</h4>
+                <p>서울특별시 청계천로 471 스카이렉스 18층</p>
+                <p>order@heruelab.com</p>
+            </div>
+            <div>
+                <h4>Links</h4>
+                <a href="index.html">HOME.</a><br>
+                <a href="about.html">ABOUT.</a><br>
+                <a href="project.html">PROJECT.</a>
+            </div>
+            <div>
+                <h4>SNS</h4>
+                <a href="https://www.instagram.com/herue_design" target="_blank">Instagram</a><br>
+                <a href="https://youtube.com/@helloherue" target="_blank">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 HERUE LAB, Inc. All Rights Reserved.
+        </div>
+    </footer>
+
+    <style>
+        .footer {
+            padding: 60px 40px;
+            background: #1a1a1a;
+            color: #fff;
+            margin-top: 100px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+        }
+        .footer h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .footer p, .footer a {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            text-decoration: none;
+            line-height: 2;
+        }
+        .footer a:hover { color: #fff; }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+            font-family: 'Monaco', monospace;
+        }
+        @media (max-width: 768px) {
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</body>
+</html>

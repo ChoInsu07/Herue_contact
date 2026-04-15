@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT. | HERUE LAB</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-98FENE8HRE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-98FENE8HRE');
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --red: #de1334;
+            --gray: #666;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .font-mono { font-family: 'Monaco', 'SF Mono', monospace; }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover { color: var(--red); }
+        .nav-link.active { color: var(--red); }
+
+        /* Page Title */
+        .page-title {
+            padding: 160px 40px 80px;
+            background: var(--light-gray);
+        }
+
+        .page-title h1 {
+            font-size: 64px;
+            font-weight: 700;
+        }
+
+        .page-title p {
+            font-size: 20px;
+            color: var(--gray);
+            margin-top: 16px;
+        }
+
+        /* Section */
+        section {
+            padding: 100px 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* CEO Section */
+        .ceo-section {
+            background: var(--white);
+        }
+
+        .ceo-card {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .ceo-photo {
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, #ddd 0%, #eee 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .ceo-info h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .ceo-info .position {
+            color: var(--red);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .ceo-info .description {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Careers */
+        .career-section {
+            background: var(--light-gray);
+        }
+
+        .career-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .career-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .career-item .year {
+            font-family: 'Monaco', monospace;
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .career-item .company {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .career-item .role {
+            color: var(--gray);
+        }
+
+        /* Partners */
+        .partners-section {
+            background: var(--white);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+        }
+
+        .partner-item {
+            aspect-ratio: 1;
+            background: var(--light-gray);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        /* Process */
+        .process-section {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .process-section .section-title { color: var(--white); }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .process-item {
+            text-align: center;
+        }
+
+        .process-number {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Monaco', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--red);
+        }
+
+        .process-item h4 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .process-item p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Team */
+        .team-section {
+            background: var(--light-gray);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .team-item {
+            text-align: center;
+        }
+
+        .team-photo {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #ddd 0%, #eee 100%);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .team-item h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .team-item p {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        /* Stats */
+        .stats-section {
+            background: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            color: var(--gray);
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 40px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 16px 48px;
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 40px;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .footer p, .footer a {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            text-decoration: none;
+            line-height: 2;
+        }
+
+        .footer a:hover { color: var(--white); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+            font-family: 'Monaco', monospace;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header { padding: 15px 20px; }
+            .nav { gap: 20px; }
+            .page-title { padding: 120px 20px 60px; }
+            .page-title h1 { font-size: 48px; }
+            section { padding: 60px 20px; }
+            .ceo-card { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: repeat(3, 1fr); }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo-text">HERUE LAB</a>
+        <nav class="nav">
+            <a href="about.html" class="nav-link active">ABOUT.</a>
+            <a href="project.html" class="nav-link">PROJECT.</a>
+            <a href="contact.html" class="nav-link">CONTACT.</a>
+        </nav>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-title">
+        <div class="container">
+            <h1>ABOUT.</h1>
+            <p>헤루랩은 브랜드의 장기적인 성장을 함께 설계하는 운영 파트너입니다.</p>
+        </div>
+    </div>
+
+    <!-- CEO Section -->
+    <section class="ceo-section">
+        <div class="container">
+            <div class="ceo-card">
+                <div class="ceo-photo">
+                    <span>CEO Photo</span>
+                </div>
+                <div class="ceo-info">
+                    <h3>김혜리</h3>
+                    <p class="position">Founder & CEO</p>
+                    <p class="description">
+                        헤루랩의 설립자 김혜리는 다양한 브랜드의 디자인과 브랜딩을 이끌며 
+                        '브랜드를 운영한다는 것'의 본질을 탐구해왔습니다.<br><br>
+                        "전략과 실행을 분리하지 않고 통합적으로 운영한다"는 철학 아래,
+                        헤루랩은 브랜드의 장기적인 성장과 일관된 아이덴티티 구축을 지원합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>8+</h3>
+                    <p>years of experience</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>projects completed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>partner brands</p>
+                </div>
+                <div class="stat-item">
+                    <h3>10+</h3>
+                    <p>team members</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers -->
+    <section class="career-section">
+        <div class="container">
+            <h2 class="section-title">REPRESENTATIVE CAREER</h2>
+            <div class="career-list">
+                <div class="career-item">
+                    <span class="year">2026</span>
+                    <span class="company">HERUE LAB</span>
+                    <span class="role">Founder & CEO</span>
+                </div>
+                <div class="career-item">
+                    <span class="year">2021</span>
+                    <span class="company">프리랜서 디자이너</span>
+                    <span class="role">브랜드 디자인 & 웹 디자인</span>
+                </div>
+                <div class="career-item">
+                    <span class="year">2018</span>
+                    <span class="company">디자인 에이전시</span>
+                    <span class="role">그래픽 디자이너</span>
+                </div>
+                <div class="career-item">
+                    <span class="year">2016</span>
+                    <span class="company">대학교 졸업</span>
+                    <span class="role">시각디자인 전공</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners-section">
+        <div class="container">
+            <h2 class="section-title">PARTNER COMPANIES</h2>
+            <div class="partners-grid">
+                <div class="partner-item">Partner 1</div>
+                <div class="partner-item">Partner 2</div>
+                <div class="partner-item">Partner 3</div>
+                <div class="partner-item">Partner 4</div>
+                <div class="partner-item">Partner 5</div>
+                <div class="partner-item">Partner 6</div>
+                <div class="partner-item">Partner 7</div>
+                <div class="partner-item">Partner 8</div>
+                <div class="partner-item">Partner 9</div>
+                <div class="partner-item">Partner 10</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="process-section">
+        <div class="container">
+            <h2 class="section-title">WORK SCOPE & PROCESS</h2>
+            <div class="process-grid">
+                <div class="process-item">
+                    <div class="process-number">01</div>
+                    <h4>Discovery</h4>
+                    <p>브랜드现状分析<br>需求调研</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">02</div>
+                    <h4>Strategy</h4>
+                    <p>品牌定位<br>方向设定</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">03</div>
+                    <h4>Design</h4>
+                    <p>创意开发<br>设计执行</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">04</div>
+                    <h4>Delivery</h4>
+                    <p>成果交付<br>运营支持</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">TEAM MEMBERS</h2>
+            <div class="team-grid">
+                <div class="team-item">
+                    <div class="team-photo">
+                        <span>Photo</span>
+                    </div>
+                    <h4>김혜리</h4>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="team-item">
+                    <div class="team-photo">
+                        <span>Photo</span>
+                    </div>
+                    <h4>팀원 2</h4>
+                    <p>Design Director</p>
+                </div>
+                <div class="team-item">
+                    <div class="team-photo">
+                        <span>Photo</span>
+                    </div>
+                    <h4>팀원 3</h4>
+                    <p>Project Manager</p>
+                </div>
+                <div class="team-item">
+                    <div class="team-photo">
+                        <span>Photo</span>
+                    </div>
+                    <h4>팀원 4</h4>
+                    <p>Senior Designer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>함께 프로젝트를 시작해보세요</h2>
+            <p>브랜드 운영 파트너가 되어드리겠습니다.</p>
+            <a href="contact.html" class="cta-btn">프로젝트 문의하기</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4>HERUE LAB</h4>
+                <p>서울특별시 청계천로 471 스카이렉스 18층</p>
+                <p>order@heruelab.com</p>
+            </div>
+            <div>
+                <h4>Links</h4>
+                <a href="index.html">HOME.</a><br>
+                <a href="project.html">PROJECT.</a><br>
+                <a href="contact.html">CONTACT.</a>
+            </div>
+            <div>
+                <h4>SNS</h4>
+                <a href="https://www.instagram.com/herue_design" target="_blank">Instagram</a><br>
+                <a href="https://youtube.com/@helloherue" target="_blank">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 HERUE LAB, Inc. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        function gtagEvent(eventName, eventParams) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventParams);
+            }
+        }
+        gtagEvent('page_view', { page_title: 'About', page_location: window.location.href });
+    </script>
+</body>
+</html>
